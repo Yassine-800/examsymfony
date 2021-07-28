@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue !!!{% endblock %}
+
+{% block body %}
+        <h1>Bibliothèque de bons films</h1>
+
+    <div class="row">
+        <a href="{{path('create_movie')}}" class="btn btn-primary">Ajouter un film</a>
+        {% for movie in movies %}
+
+        <div class="card mx-4 my-4" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ movie.name | capitalize }}</h5>
+                <p class="card-text">{{ movie.summary }}</p>
+                <p class="card-text">{{ movie.director }}</p>
+                <p class="card-text">{{ movie.yearOfRelease | date('d/m/Y')}}</p>
+                <a class="btn btn-warning" href="{{path ('show_movie', {id: movie.id} )}}"> Voir les détails du film</a>
+                <a href=" {{path ('edit_movie', {id: movie.id})}} " class="btn btn-success">Editer le film</a>
+                <a href=" {{path ('delete_movie', {id: movie.id})}} " class="btn btn-danger">Supprimer le film</a>
+            </div>
+        </div>
+
+
+
+        {% endfor %}
+    </div>
+{% endblock %}

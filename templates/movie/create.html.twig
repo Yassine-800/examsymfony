@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formulaire 'bootstrap_5_layout.html.twig' %}
+
+    {% block body %}
+        {{ form_row(formulaire.name) }}
+        {% if creation %}
+
+            <h1>Formulaire de création d'un film</h1>
+        {% else %}
+            <h1>Formulaire d'édition de film</h1>
+        {% endif %}
+        {{ form_start(formulaire) }}
+
+
+            {{ form_row(formulaire.summary) }}
+            {{ form_row(formulaire.director) }}
+{#            {{ form_row(formulaire.yearOfRelease | date('d/m/Y')) }}#}
+
+        {% if creation %}
+
+            <button class="btn btn-warning" type="submit">Enregistrer</button>
+
+        {% else %}
+
+        <button class="btn btn-danger" type="submit">Enregistrer les modifications</button>
+        {% endif %}
+
+
+
+        {{ form_end(formulaire) }}
+{% endblock %}

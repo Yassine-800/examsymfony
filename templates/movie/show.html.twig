@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% form_theme formulaire 'bootstrap_5_layout.html.twig' %}
+
+    {% block title %}Bienvenue !!!{% endblock %}
+
+{% block body %}
+    <h1>Film</h1>
+
+        <div class="card mx-4 my-4" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ movie.name | capitalize }}</h5>
+                <p class="card-text">{{ movie.summary }}</p>
+                <p class="card-text">{{ movie.director }}</p>
+                <p class="card-text">{{ movie.yearOfRelease | date('d/m/Y')}}</p>
+                <hr>
+                <p class="card-text text-center-bold">Avis sur le film</p>
+                {% for opinion in movie.opinions %}
+                    <p class="card-text">{{ opinion.content }}</p>
+                    <p class="card-text">{{ opinion.createdAt | date('d/m/Y') }}</p>
+                    <a href=" {{path ('delete_opinion', {id: opinion.id})}} " class="btn btn-danger">Supprimer l'avis</a>
+                {% endfor %}
+
+            </div>
+        </div>
+    {% if creation %}
+
+        <h1>Formulaire de création d'un avis</h1>
+    {% else %}
+        <h1>Formulaire d'édition d'avis</h1>
+    {% endif %}
+    {{ form_start(formulaire) }}
+        {{ form_row(formulaire.content) }}
+
+    {% if creation %}
+
+    <button class="btn btn-warning" type="submit">Enregistrer</button>
+
+    {% else %}
+
+    <button class="btn btn-danger" type="submit">Enregistrer les modifications</button>
+
+    {{ form_end(formulaire) }}
+{% endblock %}

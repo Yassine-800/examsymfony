@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formulaire 'bootstrap_5_layout.html.twig' %}
+
+{% block body %}
+<h1>Inscription</h1>
+{{ form_start(formulaire) }}
+        {{ form_row (formulaire.username) }}
+        {{ form_row (formulaire.password) }}
+        {{ form_row (formulaire.email) }}
+<button class="btn btn-primary" type="submit">Valider</button>
+{{ form_end(formulaire) }}
+{% endblock %}
